@@ -13,7 +13,6 @@ const createCollege = async (req, res) => {
         if (!name) {
             return res.status(400).send({status : false, msg : "name is required"})
         }
-
         if (!fullName) {
             return res.status(400).send({status : false, msg : "fullName is required"})
         }
