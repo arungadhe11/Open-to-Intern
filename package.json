@@ -1,0 +1,25 @@
+{
+  "name": "open-to-intern-group-09-",
+  "version": "1.0.0",
+  "description": "This is our 2nd project which is open-to-intern",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RINTU5500U/open-to-intern-GROUP-09-.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RINTU5500U/open-to-intern-GROUP-09-/issues"
+  },
+  "homepage": "https://github.com/RINTU5500U/open-to-intern-GROUP-09-#readme",
+  "keywords": [],
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
+    "mongoose": "^6.6.0"
+  }
+}
