@@ -36,3 +36,5 @@ const getIntern = async (req, res) => {
 
 
 module.exports = {getIntern}
+
+//---
