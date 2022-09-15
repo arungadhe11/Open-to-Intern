@@ -2,23 +2,22 @@ const internModel = require("../models/internModel")
 const collegeModel = require("../models/collegeModel")
 const validEmail = /[a-zA-Z0-9_\-\.]+[@][a-z]+[\.][a-z]{2,3}/
 const validMobile = /^([0|\+[0-9]{1,5})?([7-9][0-9]{9})$/
-const validName = /^[a-zA-Z]+([\s][a-zA-Z]+)*$/
+const validName =  /^[A-Za-z ]+$/  
 
-//without validation//
+
 const createIntern = async (req, res) => {
     try {
         let data = req.body
-        let { name, email, mobile, collegeName, isDeleted} = data
-        //let trimmedName = name
+        let { name, email, mobile, collegeName} = data
 
         if (Object.keys(data).length == 0) {
-            return res.status(400).send({ status: false, msg: "plz give input of intern " })
+            return res.status(400).send({ status: false, msg: "plz give input of intern in request body" })
         }
         if (!name) {
             return res.status(400).send({ status: false, msg: "name is required" })
         }
         if (!validName.test(name)) {
-            return res.status(400).send({ status: false, msg: "valid name is required" })
+            return res.status(400).send({ status: false, msg: "plz enter ur name in valid format" })
         }
         if (!email) {
             return res.status(400).send({ status: false, msg: "email is required" })
@@ -34,25 +33,20 @@ const createIntern = async (req, res) => {
             return res.status(400).send({ status: false, msg: "mobile is required" })
         }
         if (!validMobile.test(mobile)) {
-            return res.status(400).send({ status: false, msg: "valid mobileNo. is required" })
+            return res.status(400).send({ status: false, msg: "enter valid mobile number" })
         }
         let findmobileNo = await internModel.findOne({ mobile: mobile , isDeleted : false})
         if (findmobileNo) {
-            return res.status(400).send({ status: false, msg: "Mobile no. already exsits" })
+            return res.status(400).send({ status: false, msg: "mobile number already exsits" })
         }
         if (!collegeName) {
-            return res.status(400).send({ status: false, msg: "College name is required" })
+            return res.status(400).send({ status: false, msg: "College name is required for finding that college where u can apply for ur internship" })
         }
         let findData = await collegeModel.findOne({ name: collegeName,isDeleted:false })
         if (!findData) {
-            return res.status(404).send({ status: false, msg: " College not found" })
+            return res.status(404).send({ status: false, msg: " College doesn't exists" })
         }
-        if (isDeleted) {
-            if (isDeleted != "false") {
-                return res.status(400).send({status : false, msg : "the value of isDeleted should be always false at the time of creation"})
-            }
-        }
-        data['college'] = findData.id
+        data['collegeId'] = findData._id
 
         let saveData = await internModel.create(data)
         let finalData = {

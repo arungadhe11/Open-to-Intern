@@ -8,13 +8,9 @@ router.post("/functionup/colleges",collegeController.createCollege)
 router.post("/functionup/interns",internController.createIntern)
 router.get("/functionup/collegeDetails",getController.getIntern)
 
-
-
-
-
-router.all("/**", (req, res) =>  {
+router.all("/**", (req, res) => {
     try{
-        res.status(404).send({status: false,msg: "The api you request is not available"})
+        res.status(400).send({status: false,msg: "The api you request is not available"})
     }catch(err){
         res.send(err.message)
     }

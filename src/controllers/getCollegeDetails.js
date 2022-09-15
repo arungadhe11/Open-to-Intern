@@ -1,20 +1,19 @@
 const collegeModel = require("../models/collegeModel")
 const internModel = require("../models/internModel")
-const validCollegeName = /^[a-zA-Z]+([\s][a-zA-Z]+)*$/
+const validCollegeName = /^[A-Za-z ]+$/
 
 
 const getIntern = async (req, res) => {
     try {
         let data = req.query.collegeName
-        let collegeName = data.trim()
 
-        if (!collegeName) {
+        if (!data) {
             return res.status(400).send({status : false, msg : "give the input of collegeName"})
         }
-        if (!validCollegeName.test(collegeName)) {
+        if (!validCollegeName.test(data)) {
             return res.status(400).send({status : false, msg : "plz enter the college name in valid format"})
         }
-        let findData = await collegeModel.findOne({name : collegeName, isDeleted : false})
+        let findData = await collegeModel.findOne({name : data, isDeleted : false})
         if (!findData) {
             return res.status(404).send({status : false, msg : "college not found"})
         }
@@ -33,7 +32,6 @@ const getIntern = async (req, res) => {
         return res.status(500).send({status : false, msg : err.message})
     }
 }
-
 
 module.exports = {getIntern}
 
