@@ -1,13 +1,13 @@
 const collegeModel = require("../models/collegeModel")
 const internModel = require("../models/internModel")
-let validCollegeName = /^[a-zA-Z]+([\s][a-zA-Z]+)*$/
+const validCollegeName = /^[a-zA-Z]+([\s][a-zA-Z]+)*$/
 
-//  /^[0-9]d{9}$/
 
 const getIntern = async (req, res) => {
     try {
         let data = req.query.collegeName
         let collegeName = data.trim()
+
         if (!collegeName) {
             return res.status(400).send({status : false, msg : "give the input of collegeName"})
         }
@@ -22,13 +22,13 @@ const getIntern = async (req, res) => {
         if (!internsData) {
             return res.status(404).send({status : false, msg : "data not found"})
         }
-        let addData = {
+        let finalData = {
             name : findData.name,
-            fullName : findData.fullName,
+            fullName : findData.fullName, 
             logoLink : findData.logoLink,
             interns : internsData
         }
-            return res.status(200).send({status : true, data : addData})
+            return res.status(200).send({status : true, data : finalData})
     } catch (err) {
         return res.status(500).send({status : false, msg : err.message})
     }
@@ -37,4 +37,3 @@ const getIntern = async (req, res) => {
 
 module.exports = {getIntern}
 
-//---

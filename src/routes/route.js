@@ -1,13 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const collegeController = require("../Controllers/collegeController")
-const fetchController = require("../controllers/getCollegeDetails")
+const getController = require("../controllers/getCollegeDetails")
 const internController = require("../controllers/internController")
 
 router.post("/functionup/colleges",collegeController.createCollege)
-router.post("/functionup/colleges",internController.createIntern)
-
-router.get("/functionup/collegeDetails",fetchController.getIntern)
+router.post("/functionup/interns",internController.createIntern)
+router.get("/functionup/collegeDetails",getController.getIntern)
 
 
 
