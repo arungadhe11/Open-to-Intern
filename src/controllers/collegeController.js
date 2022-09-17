@@ -1,3 +1,5 @@
+
+
 const collegeModel = require("../models/collegeModel")
 const validName = /^[A-Za-z ]+$/    
 const validLogo = /^https?:\/\/(.+\/)+.+(\.(gif|png|jpg|jpeg|webp|svg|psd|bmp|tif|jfif))$/i
